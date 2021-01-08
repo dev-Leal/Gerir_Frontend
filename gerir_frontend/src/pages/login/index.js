@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import {Container, Form, Button,} from 'react-bootstrap';
 import logo from '../../logo.svg'
 import './index.css';
+import { useHistory } from 'react-router-dom';
 
 const Login = () =>{
 
+    let history = useHistory();
+    //public string { get; set; };
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
+    //Chama o evento de logar na Api
     const Logar =(event) => {
         event.preventDefault();
 
@@ -36,7 +40,11 @@ const Login = () =>{
         .then(data => {
             console.log(data);
 
-            localStorage.setItem('token-gerir' , data.token)
+            localStorage.setItem('token-gerir' , data.token);
+
+            history.push("/tarefas");
+
+            //Navegar para as tarefas
         })
     
     }
